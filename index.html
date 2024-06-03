@@ -22,6 +22,7 @@
             max-width: 800px;
             border: 1px solid lime;
             padding: 20px;
+            text-align: center;
         }
 
         .terminal {
@@ -32,15 +33,22 @@
             padding: 10px;
             height: 400px;
             overflow-y: scroll;
+            margin-top: 20px;
         }
 
         #output {
             white-space: pre;
         }
+
+        .logo {
+            max-width: 100px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="https://example.com/hacker-logo.png" alt="Hacker Logo" class="logo">
         <div class="terminal">
             <div id="output"></div>
         </div>
