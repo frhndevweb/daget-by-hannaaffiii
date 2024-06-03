@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dana Kaget by frhndevweb</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            border: 1px solid lime;
+            padding: 20px;
+        }
+
+        .terminal {
+            background-color: black;
+            color: lime;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+        }
+
+        #output {
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="terminal">
+            <div id="output"></div>
+        </div>
+    </div>
+    <script>
+        const output = document.getElementById('output');
+
+        const commands = [
+            'Initializing hack tool...',
+            'Bypassing security protocols...',
+            'Accessing mainframe...',
+            'Downloading sensitive data 100TB...',
+            'Injecting malware...',
+            'Transfer complete. Disconnecting...'
+        ];
+
+        let currentCommand = 0;
+
+        function typeCommand() {
+            if (currentCommand < commands.length) {
+                let command = commands[currentCommand];
+                let index = 0;
+
+                function typeChar() {
+                    if (index < command.length) {
+                        output.textContent += command.charAt(index);
+                        index++;
+                        setTimeout(typeChar, 50);
+                    } else {
+                        output.textContent += '\n';
+                        currentCommand++;
+                        setTimeout(typeCommand, 1000);
+                    }
+                }
+
+                typeChar();
+            } else {
+                output.textContent += 'Hack successful!';
+            }
+        }
+
+        setTimeout(typeCommand, 1000);
+    </script>
+</body>
+</html>
