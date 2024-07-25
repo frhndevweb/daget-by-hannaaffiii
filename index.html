@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>daget by frhndevweb</title>
+    <meta name="description" content="Simulation of a terminal hack tool by frhndevweb.">
+    <title>Dana Kaget by frhndevweb</title>
     <style>
         body {
             background-color: black;
@@ -15,6 +16,35 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
+        }
+
+        .background-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .background-text span {
+            color: rgba(0, 255, 0, 0.1);
+            font-size: 12px;
+            display: block;
+            position: absolute;
+            animation: scroll 10s linear infinite;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateY(100vh);
+            }
+            to {
+                transform: translateY(-100vh);
+            }
         }
 
         .container {
@@ -22,63 +52,106 @@
             max-width: 800px;
             border: 1px solid lime;
             padding: 20px;
+            z-index: 1;
+        }
+
+        .header {
             text-align: center;
+            font-size: 20px;
+            margin-bottom: 10px;
         }
 
         .terminal {
             background-color: black;
             color: lime;
-            font-family: 'Courier New', Courier, monospace;
             font-size: 16px;
             padding: 10px;
             height: 400px;
             overflow-y: scroll;
-            margin-top: 20px;
+            position: relative;
         }
 
         #output {
             white-space: pre;
+            word-wrap: break-word;
         }
 
-        .logo {
-            max-width: 100px;
-            margin-bottom: 20px;
+        .blinking-cursor {
+            display: inline;
+            background-color: lime;
+            margin-left: 2px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to {
+                background-color: lime;
+            }
+            50% {
+                background-color: black;
+            }
+        }
+
+        .random-color {
+            color: lime;
         }
     </style>
 </head>
 <body>
+    <div class="background-text" id="background-text">
+        <span>HACKING...</span>
+        <span>...</span>
+        <span>BY frhndevweb</span>
+        <!-- Tambahkan lebih banyak teks di sini untuk efek latar belakang -->
+    </div>
     <div class="container">
-        <img src="https://github.com/frhndevweb/daget_by_frhndevweb/blob/master/IMG_20240603_215911.png?raw=true" alt="Hacker Logo" class="logo">
+        <div class="header">
+            <div>Status: <span id="status">Idle</span></div>
+        </div>
         <div class="terminal">
             <div id="output"></div>
+            <div class="blinking-cursor"></div>
         </div>
     </div>
     <script>
         const output = document.getElementById('output');
+        const status = document.getElementById('status');
+        const cursor = document.querySelector('.blinking-cursor');
+        const backgroundText = document.getElementById('background-text');
 
         const commands = [
             'Initializing hack tool...',
             'Bypassing security protocols...',
             'Accessing mainframe...',
-            'Downloading sensitive data 100TB',
-            'Injecting malware by frhndevweb',
-            'Transfer complete. seluruh data anda tersebar...'
+            'Downloading sensitive data 100TB...',
+            'Injecting malware...',
+            'Transfer complete. Disconnecting...'
+        ];
+
+        const statuses = [
+            'Initializing',
+            'Bypassing Security',
+            'Accessing Mainframe',
+            'Downloading Data',
+            'Injecting Malware',
+            'Disconnecting'
         ];
 
         let currentCommand = 0;
 
         function typeCommand() {
             if (currentCommand < commands.length) {
+                status.textContent = statuses[currentCommand];
                 let command = commands[currentCommand];
                 let index = 0;
 
                 function typeChar() {
                     if (index < command.length) {
-                        output.textContent += command.charAt(index);
+                        output.innerHTML += `<span class="random-color">${command.charAt(index)}</span>`;
                         index++;
                         setTimeout(typeChar, 50);
                     } else {
-                        output.textContent += '\n';
+                        output.innerHTML += '<br>';
                         currentCommand++;
                         setTimeout(typeCommand, 1000);
                     }
@@ -86,9 +159,23 @@
 
                 typeChar();
             } else {
-                output.textContent += 'Hack successful!';
+                status.textContent = 'Complete';
+                output.innerHTML += '<span class="random-color">Hack successful!</span><br>';
+                setTimeout(() => {
+                    output.innerHTML += '<span class="random-color">Transfer data to frhndevweb</span>';
+                    cursor.style.display = 'none';
+                }, 1000);
             }
         }
+
+        function randomizeColors() {
+            const randomColors = ['lime', 'yellow', 'cyan', 'magenta'];
+            document.querySelectorAll('.random-color').forEach(el => {
+                el.style.color = randomColors[Math.floor(Math.random() * randomColors.length)];
+            });
+        }
+
+        setInterval(randomizeColors, 500);
 
         setTimeout(typeCommand, 1000);
     </script>
