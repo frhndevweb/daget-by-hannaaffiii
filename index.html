@@ -95,6 +95,21 @@
         .random-color {
             color: lime;
         }
+
+        #notification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: lime;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            font-size: 16px;
+            z-index: 100;
+        }
     </style>
 </head>
 <body>
@@ -113,10 +128,12 @@
             <div class="blinking-cursor"></div>
         </div>
     </div>
+    <div id="notification">cuma simulasi😁</div>
     <script>
         const output = document.getElementById('output');
         const status = document.getElementById('status');
         const cursor = document.querySelector('.blinking-cursor');
+        const notification = document.getElementById('notification');
         const backgroundText = document.getElementById('background-text');
 
         const commands = [
@@ -162,10 +179,18 @@
                 status.textContent = 'Complete';
                 output.innerHTML += '<span class="random-color">Hack successful!</span><br>';
                 setTimeout(() => {
-                    output.innerHTML += '<span class="random-color">Transfer data to frhndevweb</span>';
+                    output.innerHTML += '<span class="random-color">Transfer data to... frhndevweb</span>';
                     cursor.style.display = 'none';
+                    setTimeout(showNotification, 1000);
                 }, 1000);
             }
+        }
+
+        function showNotification() {
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
         }
 
         function randomizeColors() {
